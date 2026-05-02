@@ -20,10 +20,12 @@
       "buildNumber": "1",
       "infoPlist": {
         "UIBackgroundModes": [
+          "audio",
           "audio"
         ],
         "NSMicrophoneUsageDescription": "Nour n'utilise pas le microphone.",
-        "CFBundleDisplayName": "Nour"
+        "CFBundleDisplayName": "Nour",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
@@ -34,6 +36,8 @@
         "backgroundColor": "#050A1E"
       },
       "permissions": [
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
         "android.permission.FOREGROUND_SERVICE",
         "android.permission.MODIFY_AUDIO_SETTINGS"
       ]
@@ -71,6 +75,12 @@
       },
       "router": {}
     },
-    "owner": "charif759491"
+    "owner": "charif759491",
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/a0c0131b-9608-4338-b7f4-e51695032af9"
+    }
   }
 }
