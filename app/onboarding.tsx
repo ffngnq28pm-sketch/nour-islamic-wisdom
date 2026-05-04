@@ -14,6 +14,7 @@ import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { useUserProfile, FOCUS_THEMES, FocusTheme } from '@/context/UserProfileContext';
+import { findNameMeaning, IslamicName } from '@/data/islamicNames';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -31,6 +32,12 @@ export default function OnboardingScreen() {
   const [step, setStep] = useState<'name' | 'theme'>('name');
   const [name, setName] = useState('');
   const [chosen, setChosen] = useState<FocusTheme | null>(null);
+  const [nameMeaning, setNameMeaning] = useState<IslamicName | null>(null);
+
+  function handleNameChange(text: string) {
+    setName(text);
+    setNameMeaning(findNameMeaning(text));
+  }
 
   function handleNameNext() {
     if (step === 'name') {
@@ -82,13 +89,27 @@ export default function OnboardingScreen() {
                 placeholder="Votre prénom..."
                 placeholderTextColor="rgba(201,168,76,0.35)"
                 value={name}
-                onChangeText={setName}
+                onChangeText={handleNameChange}
                 autoFocus
                 returnKeyType="next"
                 onSubmitEditing={handleNameNext}
                 selectionColor="#C9A84C"
               />
             </View>
+
+            {nameMeaning && (
+              <View style={styles.nameMeaningCard}>
+                <Text style={styles.nameMeaningArabic}>{nameMeaning.arabic}</Text>
+                <Text style={styles.nameMeaningTitle}>{nameMeaning.name}</Text>
+                <Text style={styles.nameMeaningOrigin}>{nameMeaning.origin}</Text>
+                <Text style={styles.nameMeaningText}>{nameMeaning.meaning}</Text>
+                {nameMeaning.virtue && (
+                  <View style={styles.nameMeaningVirtue}>
+                    <Text style={styles.nameMeaningVirtueText}>✦ {nameMeaning.virtue}</Text>
+                  </View>
+                )}
+              </View>
+            )}
 
             <TouchableOpacity
               style={[styles.nextBtn, !name.trim() && styles.nextBtnDisabled]}
@@ -295,5 +316,58 @@ const styles = StyleSheet.create({
   dotActive: {
     width: 24,
     backgroundColor: '#C9A84C',
+  },
+  nameMeaningCard: {
+    width: '100%',
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: 'rgba(201,168,76,0.3)',
+    backgroundColor: 'rgba(201,168,76,0.06)',
+    padding: 18,
+    alignItems: 'center',
+    marginBottom: 20,
+    gap: 4,
+  },
+  nameMeaningArabic: {
+    fontFamily: 'Amiri_700Bold',
+    fontSize: 36,
+    color: '#C9A84C',
+    textShadowColor: 'rgba(201,168,76,0.3)',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 12,
+  },
+  nameMeaningTitle: {
+    fontFamily: 'Lato_700Bold',
+    fontSize: 16,
+    color: '#F5EDD6',
+    marginTop: 4,
+  },
+  nameMeaningOrigin: {
+    fontFamily: 'Lato_400Regular',
+    fontSize: 11,
+    color: 'rgba(201,168,76,0.6)',
+    letterSpacing: 1,
+    textTransform: 'uppercase',
+  },
+  nameMeaningText: {
+    fontFamily: 'Lato_400Regular',
+    fontSize: 14,
+    color: '#8A8FA8',
+    textAlign: 'center',
+    lineHeight: 22,
+    marginTop: 6,
+  },
+  nameMeaningVirtue: {
+    marginTop: 8,
+    paddingHorizontal: 14,
+    paddingVertical: 6,
+    borderRadius: 12,
+    backgroundColor: 'rgba(201,168,76,0.12)',
+  },
+  nameMeaningVirtueText: {
+    fontFamily: 'Lato_700Bold',
+    fontSize: 12,
+    color: '#C9A84C',
+    letterSpacing: 0.5,
   },
 });

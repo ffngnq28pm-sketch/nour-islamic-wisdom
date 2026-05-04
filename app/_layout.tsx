@@ -70,6 +70,8 @@ export default function RootLayout() {
               <Stack.Screen name="onboarding" options={{ animation: 'fade' }} />
               <Stack.Screen name="allah-names" options={{ animation: 'slide_from_right' }} />
               <Stack.Screen name="islamic-thinkers" options={{ animation: 'slide_from_right' }} />
+              <Stack.Screen name="surahs" options={{ animation: 'slide_from_right' }} />
+              <Stack.Screen name="azkar" options={{ animation: 'slide_from_right' }} />
               <Stack.Screen name="support" options={{ animation: 'slide_from_bottom', presentation: 'modal' }} />
               <Stack.Screen name="+not-found" />
             </Stack>

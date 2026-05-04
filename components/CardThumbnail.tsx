@@ -22,7 +22,7 @@ interface Props {
   onFavoriteToggle?: () => void;
 }
 
-export function CardThumbnail({ card, isPremium, isFavorite, onPress, onFavoriteToggle }: Props) {
+function CardThumbnailBase({ card, isPremium, isFavorite, onPress, onFavoriteToggle }: Props) {
   const locked = card.premium && !isPremium;
 
   return (
@@ -149,3 +149,5 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
   },
 });
+
+export const CardThumbnail = React.memo(CardThumbnailBase);
