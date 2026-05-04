@@ -97,20 +97,6 @@ export default function OnboardingScreen() {
               />
             </View>
 
-            {nameMeaning && (
-              <View style={styles.nameMeaningCard}>
-                <Text style={styles.nameMeaningArabic}>{nameMeaning.arabic}</Text>
-                <Text style={styles.nameMeaningTitle}>{nameMeaning.name}</Text>
-                <Text style={styles.nameMeaningOrigin}>{nameMeaning.origin}</Text>
-                <Text style={styles.nameMeaningText}>{nameMeaning.meaning}</Text>
-                {nameMeaning.virtue && (
-                  <View style={styles.nameMeaningVirtue}>
-                    <Text style={styles.nameMeaningVirtueText}>✦ {nameMeaning.virtue}</Text>
-                  </View>
-                )}
-              </View>
-            )}
-
             <TouchableOpacity
               style={[styles.nextBtn, !name.trim() && styles.nextBtnDisabled]}
               onPress={handleNameNext}
@@ -129,6 +115,21 @@ export default function OnboardingScreen() {
             <Text style={styles.stepTitle}>
               {name.trim() ? `Salam ${name.trim()}` : 'Votre intention'}
             </Text>
+
+            {nameMeaning && (
+              <View style={styles.nameMeaningCard}>
+                <Text style={styles.nameMeaningArabic}>{nameMeaning.arabic}</Text>
+                <Text style={styles.nameMeaningTitle}>{nameMeaning.name}</Text>
+                <Text style={styles.nameMeaningOrigin}>{nameMeaning.origin}</Text>
+                <Text style={styles.nameMeaningText}>{nameMeaning.meaning}</Text>
+                {nameMeaning.virtue && (
+                  <View style={styles.nameMeaningVirtue}>
+                    <Text style={styles.nameMeaningVirtueText}>✦ {nameMeaning.virtue}</Text>
+                  </View>
+                )}
+              </View>
+            )}
+
             <Text style={styles.stepSubtitle}>
               Choisissez un thème sur lequel vous concentrer ce mois-ci.{'\n'}
               Vos sagesses quotidiennes y seront adaptées.
