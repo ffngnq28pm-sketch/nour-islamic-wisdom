@@ -4,7 +4,7 @@ import { StoreService, ProductId, PurchaseResult } from '@/services/StoreService
 /** Nombre de cartes accessibles sans abonnement (par index dans CARDS[]). */
 export const FREE_CARD_LIMIT = 50;
 
-export type PremiumPlan = 'monthly' | 'yearly';
+export type PremiumPlan = 'monthly' | 'lifetime';
 
 export interface PremiumState {
   isPremium: boolean;
@@ -18,7 +18,7 @@ export interface PremiumState {
 
 const PLAN_MAP: Record<PremiumPlan, ProductId> = {
   monthly: 'nour_premium_monthly',
-  yearly: 'nour_premium_yearly',
+  lifetime: 'nour_premium_lifetime',
 };
 const TIP_MAP: Record<'small' | 'medium' | 'large', ProductId> = {
   small: 'tip_small',

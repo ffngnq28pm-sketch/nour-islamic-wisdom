@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { X, Star, Check, RotateCcw } from 'lucide-react-native';
+import { X, Star, Check, RotateCcw, Infinity as InfinityIcon } from 'lucide-react-native';
 import { usePremium, PremiumPlan } from '@/hooks/usePremium';
 
 const { width } = Dimensions.get('window');
@@ -24,13 +24,13 @@ const FEATURES = [
   'Accès aux 365 sagesses de la bibliothèque',
   'Les 99 Noms d\'Allah — collection complète',
   'Penseurs islamiques — série encyclopédique',
-  'Fonds d\'écran en haute résolution',
+  'Système éducatif · 10 modules · 200 quiz',
   'Sessions guidées · Parcours spirituels thématiques',
 ];
 
 export function PremiumPaywall({ visible, onClose }: Props) {
   const { purchasePlan, restorePurchases, isLoading } = usePremium();
-  const [plan, setPlan] = useState<PremiumPlan>('yearly');
+  const [plan, setPlan] = useState<PremiumPlan>('lifetime');
   const [restoreMsg, setRestoreMsg] = useState('');
   const shimmer = useRef(new Animated.Value(0)).current;
   const slideUp = useRef(new Animated.Value(60)).current;
@@ -63,7 +63,7 @@ export function PremiumPaywall({ visible, onClose }: Props) {
 
   async function handleRestore() {
     const ok = await restorePurchases();
-    setRestoreMsg(ok ? 'Accès restauré ✓' : 'Aucun abonnement retrouvé');
+    setRestoreMsg(ok ? 'Accès restauré ✓' : 'Aucun achat retrouvé');
     if (ok) onClose();
     setTimeout(() => setRestoreMsg(''), 3000);
   }
@@ -72,28 +72,21 @@ export function PremiumPaywall({ visible, onClose }: Props) {
     <Modal visible={visible} transparent animationType="none" statusBarTranslucent>
       <Animated.View style={[styles.overlay, { opacity: fadeIn }]}>
         <Animated.View style={[styles.sheet, { transform: [{ translateY: slideUp }] }]}>
-          {/* Header avec shimmer */}
+          {/* Header */}
           <View style={styles.header}>
             <LinearGradient
               colors={['#0A1628', '#0D1B3E']}
               style={StyleSheet.absoluteFillObject}
             />
-            <Animated.View
-              style={[styles.shimmer, { transform: [{ translateX: shimmerX }] }]}
-            />
+            <Animated.View style={[styles.shimmer, { transform: [{ translateX: shimmerX }] }]} />
             <TouchableOpacity style={styles.closeBtn} onPress={onClose}>
               <X size={18} color="#8A8FA8" />
             </TouchableOpacity>
-
             <View style={styles.badge}>
               <Star size={11} color="#C9A84C" fill="#C9A84C" />
               <Text style={styles.badgeText}>NOUR PREMIUM</Text>
             </View>
-
             <Text style={styles.headline}>Éveille ta lumière{'\n'}intérieure</Text>
-            <View style={styles.trialBadge}>
-              <Text style={styles.trialText}>✦ 7 jours gratuits · Résiliable à tout moment</Text>
-            </View>
           </View>
 
           {/* Features */}
@@ -108,31 +101,36 @@ export function PremiumPaywall({ visible, onClose }: Props) {
             ))}
           </View>
 
-          {/* Sélecteur de plan */}
+          {/* Plans */}
           <View style={styles.plans}>
+            {/* Lifetime — best offer */}
             <TouchableOpacity
-              style={[styles.plan, plan === 'yearly' && styles.planSelected]}
-              onPress={() => setPlan('yearly')}
+              style={[styles.planLifetime, plan === 'lifetime' && styles.planLifetimeSelected]}
+              onPress={() => setPlan('lifetime')}
               activeOpacity={0.85}
             >
-              {plan === 'yearly' && (
-                <View style={styles.bestValue}>
-                  <Text style={styles.bestValueText}>ÉCONOMISEZ 58%</Text>
-                </View>
-              )}
-              <View style={styles.planContent}>
-                <View>
-                  <Text style={[styles.planTitle, plan === 'yearly' && styles.planTitleOn]}>
-                    Annuel
+              <View style={styles.bestBadge}>
+                <InfinityIcon size={10} color="#050A1E" strokeWidth={2.5} />
+                <Text style={styles.bestBadgeText}>MEILLEURE OFFRE</Text>
+              </View>
+              <View style={styles.lifetimeContent}>
+                <View style={styles.lifetimeLeft}>
+                  <Text style={[styles.planTitle, plan === 'lifetime' && styles.planTitleOn]}>
+                    À vie
                   </Text>
-                  <Text style={styles.planSub}>1,25€ / mois</Text>
+                  <Text style={styles.planSub}>Paiement unique · toutes mises à jour</Text>
+                  <Text style={styles.planEquiv}>≈ 8 mois d'abonnement</Text>
                 </View>
-                <Text style={[styles.planPrice, plan === 'yearly' && styles.planPriceOn]}>
-                  14,99€
-                </Text>
+                <View style={styles.lifetimeRight}>
+                  <Text style={[styles.planPrice, plan === 'lifetime' && styles.planPriceOn]}>
+                    39,99€
+                  </Text>
+                  <Text style={styles.planPriceSub}>une seule fois</Text>
+                </View>
               </View>
             </TouchableOpacity>
 
+            {/* Monthly */}
             <TouchableOpacity
               style={[styles.plan, plan === 'monthly' && styles.planSelected]}
               onPress={() => setPlan('monthly')}
@@ -146,7 +144,7 @@ export function PremiumPaywall({ visible, onClose }: Props) {
                   <Text style={styles.planSub}>Résiliable à tout moment</Text>
                 </View>
                 <Text style={[styles.planPrice, plan === 'monthly' && styles.planPriceOn]}>
-                  2,99€
+                  4,99€
                 </Text>
               </View>
             </TouchableOpacity>
@@ -169,15 +167,21 @@ export function PremiumPaywall({ visible, onClose }: Props) {
                 <ActivityIndicator color="#050A1E" />
               ) : (
                 <Text style={styles.ctaText}>
-                  {plan === 'yearly'
-                    ? 'Commencer l\'essai gratuit — 7 jours'
-                    : 'Rejoindre Nour Premium — 2,99€ / mois'}
+                  {plan === 'lifetime'
+                    ? 'Débloquer tout à vie — 39,99€'
+                    : 'Rejoindre Nour Premium — 4,99€ / mois'}
                 </Text>
               )}
             </LinearGradient>
           </TouchableOpacity>
 
-          {/* Restaurer */}
+          {plan === 'lifetime' && (
+            <Text style={styles.lifetimeNote}>
+              Toutes les mises à jour futures incluses · Accès immédiat
+            </Text>
+          )}
+
+          {/* Restore */}
           <TouchableOpacity
             style={styles.restoreRow}
             onPress={handleRestore}
@@ -191,7 +195,7 @@ export function PremiumPaywall({ visible, onClose }: Props) {
           </TouchableOpacity>
 
           <Text style={styles.legal}>
-            Paiement sécurisé · Abonnement géré par Apple ou Google
+            Paiement sécurisé · Géré par Apple ou Google
           </Text>
         </Animated.View>
       </Animated.View>
@@ -221,18 +225,15 @@ const styles = StyleSheet.create({
   },
   shimmer: {
     position: 'absolute',
-    top: 0,
-    bottom: 0,
+    top: 0, bottom: 0,
     width: 100,
     backgroundColor: 'rgba(201,168,76,0.06)',
     transform: [{ skewX: '-20deg' }],
   },
   closeBtn: {
     position: 'absolute',
-    top: 16,
-    right: 18,
-    width: 30,
-    height: 30,
+    top: 16, right: 18,
+    width: 30, height: 30,
     borderRadius: 15,
     backgroundColor: 'rgba(255,255,255,0.07)',
     alignItems: 'center',
@@ -260,18 +261,6 @@ const styles = StyleSheet.create({
     color: '#F5EDD6',
     textAlign: 'center',
     lineHeight: 36,
-    marginBottom: 10,
-  },
-  trialBadge: {
-    backgroundColor: 'rgba(255,255,255,0.05)',
-    borderRadius: 20,
-    paddingHorizontal: 14,
-    paddingVertical: 5,
-  },
-  trialText: {
-    fontFamily: 'Lato_400Regular',
-    fontSize: 11,
-    color: '#8A8FA8',
   },
   features: {
     paddingHorizontal: 22,
@@ -285,8 +274,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   checkCircle: {
-    width: 18,
-    height: 18,
+    width: 18, height: 18,
     borderRadius: 9,
     backgroundColor: 'rgba(201,168,76,0.14)',
     alignItems: 'center',
@@ -299,42 +287,61 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   plans: {
-    flexDirection: 'row',
     gap: 10,
     paddingHorizontal: 18,
     marginTop: 16,
     marginBottom: 14,
   },
+  planLifetime: {
+    borderRadius: 14,
+    borderWidth: 1.5,
+    borderColor: 'rgba(201,168,76,0.3)',
+    backgroundColor: 'rgba(201,168,76,0.05)',
+    overflow: 'hidden',
+  },
+  planLifetimeSelected: {
+    borderColor: '#C9A84C',
+    backgroundColor: 'rgba(201,168,76,0.1)',
+  },
+  bestBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: '#C9A84C',
+    paddingVertical: 4,
+    paddingHorizontal: 12,
+    justifyContent: 'center',
+  },
+  bestBadgeText: {
+    fontFamily: 'Lato_700Bold',
+    fontSize: 9,
+    color: '#050A1E',
+    letterSpacing: 1.5,
+  },
+  lifetimeContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 14,
+  },
+  lifetimeLeft: { flex: 1 },
+  lifetimeRight: { alignItems: 'flex-end' },
   plan: {
-    flex: 1,
     borderRadius: 14,
     borderWidth: 1.5,
     borderColor: 'rgba(255,255,255,0.09)',
     backgroundColor: 'rgba(255,255,255,0.03)',
     overflow: 'hidden',
-    paddingTop: 5,
   },
   planSelected: {
     borderColor: '#C9A84C',
     backgroundColor: 'rgba(201,168,76,0.07)',
   },
-  bestValue: {
-    backgroundColor: '#C9A84C',
-    paddingVertical: 2,
-    alignItems: 'center',
-    marginBottom: 2,
-  },
-  bestValueText: {
-    fontFamily: 'Lato_700Bold',
-    fontSize: 8,
-    color: '#050A1E',
-    letterSpacing: 1.5,
-  },
   planContent: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 12,
+    padding: 14,
   },
   planTitle: {
     fontFamily: 'Lato_700Bold',
@@ -348,10 +355,22 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: '#5A6070',
   },
+  planEquiv: {
+    fontFamily: 'Lato_700Bold',
+    fontSize: 10,
+    color: '#C9A84C',
+    marginTop: 3,
+  },
   planPrice: {
     fontFamily: 'Amiri_700Bold',
-    fontSize: 18,
+    fontSize: 22,
     color: '#8A8FA8',
+  },
+  planPriceSub: {
+    fontFamily: 'Lato_400Regular',
+    fontSize: 9,
+    color: '#5A6070',
+    textAlign: 'right',
   },
   planPriceOn: { color: '#C9A84C' },
   cta: {
@@ -372,12 +391,20 @@ const styles = StyleSheet.create({
     color: '#050A1E',
     letterSpacing: 0.2,
   },
+  lifetimeNote: {
+    fontFamily: 'Lato_400Regular',
+    fontSize: 10,
+    color: '#C9A84C',
+    textAlign: 'center',
+    marginTop: 8,
+    opacity: 0.8,
+  },
   restoreRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     gap: 6,
-    marginTop: 14,
+    marginTop: 12,
     paddingVertical: 6,
   },
   restoreText: {
@@ -390,7 +417,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: '#3A4060',
     textAlign: 'center',
-    marginTop: 8,
+    marginTop: 6,
     paddingHorizontal: 20,
   },
 });

@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, LayoutAnimation } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Platform, LayoutAnimation } from 'react-native';
 import { useTheme } from '@/context/ThemeContext';
 import { usePremium } from '@/hooks/usePremium';
 import { AudioService, AMBIENT_TRACKS, AmbientId, unlockWebAudioSync, isWebAudioUnlocked } from '@/services/AudioService';
@@ -21,15 +21,18 @@ export function AudioActivationBanner() {
     catch { return null; }
   });
   const [loading, setLoading] = useState<AmbientId | null>(null);
+  const [audioError, setAudioError] = useState(false);
 
   const handleActivate = useCallback(() => {
     if (!isWebAudioUnlocked()) unlockWebAudioSync(getSilenceUrl());
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setExpanded(true);
+    setAudioError(false);
   }, []);
 
   const handleSelect = useCallback(async (id: AmbientId) => {
     if (!isWebAudioUnlocked()) unlockWebAudioSync(getSilenceUrl());
+    setAudioError(false);
     if (activeId === id) {
       await AudioService.stopAmbient();
       setActiveId(null);
@@ -41,13 +44,18 @@ export function AudioActivationBanner() {
       await AudioService.playAmbient(id, 0.7);
       setActiveId(id);
       AsyncStorage_like.set(PREFS_KEY, JSON.stringify({ activeId: id, volume: 0.7 }));
-    } catch {}
-    finally { setLoading(null); }
+    } catch {
+      if (Platform.OS === 'web') setAudioError(true);
+    } finally {
+      setLoading(null);
+    }
   }, [activeId]);
 
   const handleDismiss = useCallback(async () => {
     await AudioService.stopAmbient();
-    setActiveId(null); setExpanded(false);
+    setActiveId(null);
+    setExpanded(false);
+    setAudioError(false);
     AsyncStorage_like.set(PREFS_KEY, JSON.stringify({ activeId: null, volume: 0.7 }));
   }, []);
 
@@ -91,7 +99,7 @@ export function AudioActivationBanner() {
               onPress={() => !locked && handleSelect(t.id)}
               activeOpacity={locked ? 1 : 0.75}
             >
-              <Text style={styles.emoji}>{loading === t.id ? '⏳' : t.emoji}</Text>
+              <Text style={styles.emoji}>{loading === t.id ? '⏳' : isActive ? '🔊' : t.emoji}</Text>
               <Text style={[styles.label, { color: isActive ? accent : colors.textMuted }]} numberOfLines={2}>
                 {t.label}
               </Text>
@@ -100,9 +108,15 @@ export function AudioActivationBanner() {
           );
         })}
       </View>
-      <Text style={[styles.hint, { color: colors.textMuted }]}>
-        Récitations coraniques : bouton ▶ sur chaque carte
-      </Text>
+      {audioError ? (
+        <Text style={[styles.errorHint, { color: '#E07070' }]}>
+          🔇 Audio bloqué — cliquez n'importe où sur la page puis réessayez
+        </Text>
+      ) : (
+        <Text style={[styles.hint, { color: colors.textMuted }]}>
+          Récitations coraniques : bouton ▶ sur chaque carte
+        </Text>
+      )}
     </View>
   );
 }
@@ -122,4 +136,5 @@ const styles = StyleSheet.create({
   label: { fontFamily: 'Lato_400Regular', fontSize: 10, textAlign: 'center', lineHeight: 14 },
   lock: { fontSize: 9, fontFamily: 'Lato_700Bold' },
   hint: { fontFamily: 'Lato_400Regular', fontSize: 10, textAlign: 'center', opacity: 0.7 },
+  errorHint: { fontFamily: 'Lato_400Regular', fontSize: 10, textAlign: 'center' },
 });

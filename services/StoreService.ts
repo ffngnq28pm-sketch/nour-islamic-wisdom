@@ -9,16 +9,16 @@
  *   3. Build via EAS: `eas build` (react-native-purchases requires native code)
  *
  * RevenueCat dashboard config expected:
- *   Entitlement : "premium"  → linked to nour_premium_monthly + nour_premium_yearly
- *   Offering    : "default"  → packages: nour_premium_monthly, nour_premium_yearly
+ *   Entitlement : "premium"  → linked to nour_premium_monthly + nour_premium_lifetime
+ *   Offering    : "default"  → packages: nour_premium_monthly, nour_premium_lifetime
  *   Offering    : "tips"     → packages: tip_small, tip_medium, tip_large
  *
  * Product IDs to register in App Store Connect / Google Play Console:
- *   nour_premium_monthly  — auto-renewable subscription, 2,99€/mois, 7-day trial
- *   nour_premium_yearly   — auto-renewable subscription, 14,99€/an, 7-day trial
- *   tip_small             — consumable, 0,99€
- *   tip_medium            — consumable, 2,99€
- *   tip_large             — consumable, 4,99€
+ *   nour_premium_monthly   — auto-renewable subscription, 4,99€/mois
+ *   nour_premium_lifetime  — non-consumable one-time purchase, 39,99€
+ *   tip_small              — consumable, 0,99€
+ *   tip_medium             — consumable, 2,99€
+ *   tip_large              — consumable, 4,99€
  */
 
 import { Platform, NativeModules } from 'react-native';
@@ -28,7 +28,7 @@ import { AsyncStorage_like } from '@/context/storage';
 
 export type ProductId =
   | 'nour_premium_monthly'
-  | 'nour_premium_yearly'
+  | 'nour_premium_lifetime'
   | 'tip_small'
   | 'tip_medium'
   | 'tip_large';
@@ -88,22 +88,19 @@ const CATALOG: Product[] = [
   {
     id: 'nour_premium_monthly',
     title: 'Nour Premium — Mensuel',
-    price: '2,99€',
-    priceAmount: 2.99,
+    price: '4,99€',
+    priceAmount: 4.99,
     currency: 'EUR',
-    description: 'Accès complet · 7 jours offerts',
+    description: 'Accès complet · résiliable à tout moment',
     subscriptionPeriod: 'P1M',
-    trialDays: 7,
   },
   {
-    id: 'nour_premium_yearly',
-    title: 'Nour Premium — Annuel',
-    price: '14,99€',
-    priceAmount: 14.99,
+    id: 'nour_premium_lifetime',
+    title: 'Nour Premium — À vie',
+    price: '39,99€',
+    priceAmount: 39.99,
     currency: 'EUR',
-    description: '1,25€ / mois — économisez 58%',
-    subscriptionPeriod: 'P1Y',
-    trialDays: 7,
+    description: 'Accès permanent · toutes les mises à jour futures',
   },
   {
     id: 'tip_small',
@@ -140,16 +137,17 @@ const MockStore = {
   purchase(productId: ProductId): Promise<PurchaseResult> {
     return new Promise((resolve) =>
       setTimeout(() => {
-        const isSub =
+        const isPremiumProduct =
           productId === 'nour_premium_monthly' ||
-          productId === 'nour_premium_yearly';
-        if (isSub) {
-          const ms =
-            productId === 'nour_premium_yearly'
-              ? 365 * 86400000
-              : 30 * 86400000;
+          productId === 'nour_premium_lifetime';
+        if (isPremiumProduct) {
           AsyncStorage_like.set(MOCK_KEY, 'true');
-          AsyncStorage_like.set(MOCK_EXPIRY, String(Date.now() + ms));
+          if (productId === 'nour_premium_lifetime') {
+            // Lifetime — no expiry
+            AsyncStorage_like.remove(MOCK_EXPIRY);
+          } else {
+            AsyncStorage_like.set(MOCK_EXPIRY, String(Date.now() + 30 * 86400000));
+          }
           notifyListeners(true);
         }
         resolve({ success: true, productId });
