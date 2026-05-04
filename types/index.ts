@@ -26,22 +26,87 @@ export type Theme =
   | 'Humilité'
   | 'Justice'
   | 'Pardon'
-  | 'Acceptation';
+  | 'Acceptation'
+  | 'Dhikr'
+  | 'Tawakkul'
+  | 'Guidance'
+  | 'Purification'
+  | 'Repentance'
+  | 'Lumière'
+  | 'Confiance';
 
 export type SourceType =
   | 'Coran'
   | 'Hadith'
   | 'Rumi'
-  | 'Marc Aurèle'
-  | 'Épictète'
   | 'Ibn Arabi'
   | 'Avicenne'
   | 'Al-Ghazali'
   | 'Hafez'
-  | 'Omar Khayyam'
-  | 'Sénèque'
-  | 'Upanishads'
-  | 'Bhagavad Gita'
-  | 'Bouddha'
-  | 'Confucius'
-  | 'Lao Tzu';
+  | 'Omar Khayyam';
+
+// ── Education system ─────────────────────────────────────────
+
+export type GradeLevel =
+  | 'Postulant'
+  | 'Novice'
+  | 'Apprenti'
+  | 'Disciple'
+  | 'Initié'
+  | 'Aspirant'
+  | 'Gardien'
+  | 'Compagnon'
+  | 'Savant'
+  | 'Maître';
+
+export interface Lesson {
+  id: string;
+  moduleId: number;
+  order: number;
+  title: string;
+  subtitle: string;
+  content: string;
+  keyPoints: string[];
+  arabicQuote?: string;
+  arabicSource?: string;
+  duration: number; // minutes
+}
+
+export interface EducationModule {
+  id: number;
+  title: string;
+  description: string;
+  icon: string;
+  color: string;
+  lessons: Lesson[];
+}
+
+export type QuizDifficulty = 'facile' | 'moyen' | 'difficile';
+
+export interface QuizQuestion {
+  id: string;
+  moduleId: number;
+  difficulty: QuizDifficulty;
+  question: string;
+  options: string[];
+  correctAnswer: number;
+  explanation: string;
+  source?: string;
+}
+
+export interface ModuleProgress {
+  moduleId: number;
+  lessonsCompleted: string[];
+  quizScores: number[];
+  bestScore: number;
+  unlocked: boolean;
+}
+
+export interface EducationProgress {
+  modules: Record<number, ModuleProgress>;
+  totalQuizAnswered: number;
+  totalCorrect: number;
+  grade: GradeLevel;
+  gradeScore: number;
+  lastActivity: string;
+}

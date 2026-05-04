@@ -50,7 +50,7 @@ export const ISLAMIC_THINKERS: IslamicThinker[] = [
     influence: "Thomas d'Aquin le cite des centaines de fois comme 'Le Commentateur'. Dante lui réserve une place d'honneur dans les Limbes de La Divine Comédie. Spinoza, Leibniz et les Lumières s'inscrivent dans la tradition rationaliste qu'il a fondée. Il est aujourd'hui considéré comme le père du laïcisme dans le monde islamique.",
     didYouKnow: "Ibn Rushd était également astronome : il rejeta le modèle des épicycles de Ptolémée et proposa le premier un modèle planétaire fondé sur l'observation directe — anticipant Copernic de 400 ans.",
     colorAccent: '#4A7FA5',
-    backgroundImage: 'https://images.pexels.com/photos/3225517/pexels-photo-3225517.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    backgroundImage: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMwZDFhMGEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxYTJkMWEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNnKSIvPjx0ZXh0IHg9IjQwMCIgeT0iMzYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjI4MCIgZm9udC1mYW1pbHk9InNlcmlmIiBmaWxsPSIjNEE3RkE1IiBvcGFjaXR5PSIwLjciPti5PC90ZXh0Pjwvc3ZnPg==',
     portraitGlyph: 'ع',
   },
   {
@@ -82,7 +82,7 @@ export const ISLAMIC_THINKERS: IslamicThinker[] = [
     influence: "Ibn Sina reconnut devoir sa compréhension d'Aristote à Al-Farabi. Maïmonide, le philosophe juif médiéval, s'en inspire directement. Ses travaux sur la musique influencèrent les théoriciens médiévaux européens. Sa politique philosophique annonce Machiavel et les philosophes du contrat social.",
     didYouKnow: "Al-Farabi était polyglotte extraordinaire — selon les sources historiques, il maîtrisait jusqu'à 70 langues. Selon une anecdote, lors d'une audience à la cour, il se mit à parler la langue maternelle de chaque courtisan présent, stupéfiant l'assemblée entière.",
     colorAccent: '#5A8A5A',
-    backgroundImage: 'https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    backgroundImage: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMwZDFhMGEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxYTJkMWEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNnKSIvPjx0ZXh0IHg9IjQwMCIgeT0iMzYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjI4MCIgZm9udC1mYW1pbHk9InNlcmlmIiBmaWxsPSIjNUE4QTVBIiBvcGFjaXR5PSIwLjciPtmBPC90ZXh0Pjwvc3ZnPg==',
     portraitGlyph: 'ف',
   },
   {
@@ -113,7 +113,7 @@ export const ISLAMIC_THINKERS: IslamicThinker[] = [
     influence: "Arnold Toynbee le qualifie de 'plus grand philosophe de l'histoire de tous les temps'. Les économistes modernes voient en lui le précurseur de la courbe de Laffer. Le président Ronald Reagan le citait pour justifier ses baisses d'impôts. Sa notion d'Asabiyya est aujourd'hui utilisée par les sociologues et les politologues du monde entier.",
     didYouKnow: "Lors de sa rencontre avec Tamerlan en 1400, Ibn Khaldoun fut descendu par des cordes depuis les remparts assiégés de Damas pour négocier avec le conquérant mongol. Il resta 35 jours dans son camp, analysant méticuleusement son caractère et sa psychologie — une des premières études de leadership politique de l'histoire.",
     colorAccent: '#A5664A',
-    backgroundImage: 'https://images.pexels.com/photos/2161467/pexels-photo-2161467.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    backgroundImage: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMwZDFhMGEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxYTJkMWEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNnKSIvPjx0ZXh0IHg9IjQwMCIgeT0iMzYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjI4MCIgZm9udC1mYW1pbHk9InNlcmlmIiBmaWxsPSIjQTU2NjRBIiBvcGFjaXR5PSIwLjciPtiuPC90ZXh0Pjwvc3ZnPg==',
     portraitGlyph: 'خ',
   },
   {
@@ -145,7 +145,7 @@ export const ISLAMIC_THINKERS: IslamicThinker[] = [
     influence: "Goethe, Nietzsche, Rilke et Hesse ont été profondément marqués par sa poésie. Les traductions de Coleman Barks l'ont rendu accessible à l'Occident contemporain. Madonna, Coldplay et d'innombrables artistes modernes s'en inspirent. Paulo Coelho le cite comme l'une de ses influences majeures.",
     didYouKnow: "Quand Rumi mourut en 1273, des milliers de chrétiens, juifs et musulmans de Konya portèrent son deuil ensemble — phénomène extraordinaire pour l'époque. Ils disaient : 'Il est notre Moïse, notre Jésus, notre Mahomet.' C'est l'illustration vivante de son enseignement sur l'unité des traditions.",
     colorAccent: '#C9A84C',
-    backgroundImage: 'https://images.pexels.com/photos/1590549/pexels-photo-1590549.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    backgroundImage: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMwZDFhMGEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxYTJkMWEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNnKSIvPjx0ZXh0IHg9IjQwMCIgeT0iMzYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjI4MCIgZm9udC1mYW1pbHk9InNlcmlmIiBmaWxsPSIjQzlBODRDIiBvcGFjaXR5PSIwLjciPtixPC90ZXh0Pjwvc3ZnPg==',
     portraitGlyph: 'ر',
   },
   {
@@ -176,7 +176,7 @@ export const ISLAMIC_THINKERS: IslamicThinker[] = [
     influence: "Son influence sur Rumi, Mulla Sadra et tous les soufis postérieurs est immense. Henry Corbin lui consacra sa vie entière et le considéra comme le plus grand des mystiques. Borges s'inspire de ses conceptions du temps et de l'espace. William Chittick a traduit et commenté ses œuvres pour le monde anglophone.",
     didYouKnow: "Ibn Arabi aurait rencontré Ibn Rushd (Averroès) étant enfant à Séville. Leur dialogue légendaire — entre le plus grand rationaliste et le plus grand mystique de l'Islam — est considéré comme la rencontre la plus symbolique de l'histoire intellectuelle islamique.",
     colorAccent: '#7A5A9A',
-    backgroundImage: 'https://images.pexels.com/photos/1252890/pexels-photo-1252890.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    backgroundImage: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMwZDFhMGEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxYTJkMWEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNnKSIvPjx0ZXh0IHg9IjQwMCIgeT0iMzYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjI4MCIgZm9udC1mYW1pbHk9InNlcmlmIiBmaWxsPSIjN0E1QTlBIiBvcGFjaXR5PSIwLjciPtmFPC90ZXh0Pjwvc3ZnPg==',
     portraitGlyph: 'م',
   },
   {
@@ -208,7 +208,7 @@ export const ISLAMIC_THINKERS: IslamicThinker[] = [
     influence: "Thomas d'Aquin le cite dans la Somme théologique. Pascal développe dans ses Pensées des arguments très proches du scepticisme puis de la foi d'Al-Ghazali. Sa psychologie spirituelle — analyse des maladies de l'âme — anticipe Freud. Max Horten et Miguel Asín Palacios ont montré ses liens profonds avec la mystique chrétienne.",
     didYouKnow: "Al-Ghazali était un maître de la mémoire prodigieuse : il réécrivit de mémoire la totalité de ses manuscrits (plusieurs milliers de pages) après qu'ils furent volés par des brigands lors d'un voyage. Cet événement le convainquit que la vraie connaissance doit être inscrite dans le cœur, non dans des livres.",
     colorAccent: '#3A7A6A',
-    backgroundImage: 'https://images.pexels.com/photos/3876395/pexels-photo-3876395.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    backgroundImage: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMwZDFhMGEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxYTJkMWEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNnKSIvPjx0ZXh0IHg9IjQwMCIgeT0iMzYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjI4MCIgZm9udC1mYW1pbHk9InNlcmlmIiBmaWxsPSIjM0E3QTZBIiBvcGFjaXR5PSIwLjciPti6PC90ZXh0Pjwvc3ZnPg==',
     portraitGlyph: 'غ',
   },
   {
@@ -240,7 +240,7 @@ export const ISLAMIC_THINKERS: IslamicThinker[] = [
     influence: "Roger Bacon, Thomas d'Aquin, Duns Scot, Descartes et Leibniz s'inscrivent dans sa continuité. L'épidémiologie moderne lui doit la notion de contagion par l'air. Le concept de quarantaine vient directement de ses recommandations. Sa psychologie médicale annonce Freud et la psychosomatique.",
     didYouKnow: "Ibn Sina dictait ses œuvres à cheval entre deux villes. Lors d'une période d'incarcération, il rédigea de mémoire un résumé complet de toute la philosophie aristotélicienne. Il déclarait que 'chaque problème auquel j'ai réfléchi a été résolu pendant mon sommeil'.",
     colorAccent: '#4A8A7A',
-    backgroundImage: 'https://images.pexels.com/photos/2901209/pexels-photo-2901209.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    backgroundImage: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMwZDFhMGEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxYTJkMWEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNnKSIvPjx0ZXh0IHg9IjQwMCIgeT0iMzYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjI4MCIgZm9udC1mYW1pbHk9InNlcmlmIiBmaWxsPSIjNEE4QTdBIiBvcGFjaXR5PSIwLjciPtizPC90ZXh0Pjwvc3ZnPg==',
     portraitGlyph: 'س',
   },
   {
@@ -269,7 +269,7 @@ export const ISLAMIC_THINKERS: IslamicThinker[] = [
     influence: "Goethe fut bouleversé par sa découverte de Hafez et écrivit le West-östlicher Divan en 1819 en hommage direct. Ralph Waldo Emerson le traduisit et l'éleva. Nietzsche s'y référa. Edward Fitzgerald, traducteur d'Omar Khayyam, reconnaissait Hafez comme son vrai maître. Il influence poètes, musiciens et cinéastes iraniens du monde entier.",
     didYouKnow: "Quand on ouvre le Divan de Hafez au hasard et qu'on lit le premier vers qui apparaît, il est censé répondre à la question qu'on porte dans son cœur. Cette pratique divinatoire — le Fāl-e Ḥāfiẓ — est encore courante en Iran aujourd'hui, y compris chez des millions d'Iraniens non-pratiquants.",
     colorAccent: '#C9803C',
-    backgroundImage: 'https://images.pexels.com/photos/1477321/pexels-photo-1477321.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    backgroundImage: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMwZDFhMGEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxYTJkMWEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNnKSIvPjx0ZXh0IHg9IjQwMCIgeT0iMzYwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjI4MCIgZm9udC1mYW1pbHk9InNlcmlmIiBmaWxsPSIjQzk4MDNDIiBvcGFjaXR5PSIwLjciPtitPC90ZXh0Pjwvc3ZnPg==',
     portraitGlyph: 'ح',
   },
 ];

@@ -66,7 +66,7 @@ export function useRamadan(): RamadanState {
   const info = getRamadanInfo(now);
 
   if (!info || !info.active) {
-    return { isRamadan: false, day: 0, total: 30, iftarCountdown: '00:00:00', iftarPassed: false };
+    return { isRamadan: false, day: 0, total: 30, iftarCountdown: '--:--:--', iftarPassed: false };
   }
 
   const iftar = getIftarTime();

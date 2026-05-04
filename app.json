@@ -26,6 +26,18 @@
         "NSMicrophoneUsageDescription": "Nour n'utilise pas le microphone.",
         "CFBundleDisplayName": "Nour",
         "ITSAppUsesNonExemptEncryption": false
+      },
+      "privacyManifests": {
+        "NSPrivacyAccessedAPITypes": [
+          {
+            "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+            "NSPrivacyAccessedAPITypeReasons": [
+              "CA92.1"
+            ]
+          }
+        ],
+        "NSPrivacyCollectedDataTypes": [],
+        "NSPrivacyTracking": false
       }
     },
     "android": {
@@ -67,7 +79,8 @@
       ]
     ],
     "experiments": {
-      "typedRoutes": true
+      "typedRoutes": true,
+      "baseUrl": "/nour-islamic-wisdom"
     },
     "extra": {
       "eas": {

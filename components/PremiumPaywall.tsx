@@ -25,7 +25,7 @@ const FEATURES = [
   'Les 99 Noms d\'Allah — collection complète',
   'Penseurs islamiques — série encyclopédique',
   'Fonds d\'écran en haute résolution',
-  'Contemplation hors-ligne · Aucune publicité',
+  'Sessions guidées · Parcours spirituels thématiques',
 ];
 
 export function PremiumPaywall({ visible, onClose }: Props) {

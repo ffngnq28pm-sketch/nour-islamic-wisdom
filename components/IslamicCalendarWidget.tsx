@@ -28,6 +28,14 @@ export function IslamicCalendarWidget() {
 
   const periodLabel = PERIOD_LABELS[period];
 
+  const today = new Date();
+  const gregStr = today.toLocaleDateString('fr-FR', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+
   return (
     <TouchableOpacity
       style={[styles.container, { backgroundColor: colors.bgSection, borderColor: colors.border }]}
@@ -40,8 +48,11 @@ export function IslamicCalendarWidget() {
 
         {/* Hijri date */}
         <View style={styles.dateBlock}>
+          <Text style={[styles.gregDate, { color: colors.textMuted }]}>
+            🗓️ {gregStr}
+          </Text>
           <Text style={[styles.hijriDay, { color: colors.textPrimary }]}>
-            {hijri.day} {hijri.monthName}
+            🌙 {hijri.day} {hijri.monthName}
           </Text>
           <Text style={[styles.hijriYear, { color: colors.textMuted }]}>
             {hijri.year} H
@@ -129,6 +140,10 @@ const styles = StyleSheet.create({
   },
   dateBlock: {
     gap: 1,
+  },
+  gregDate: {
+    fontFamily: 'Lato_400Regular',
+    fontSize: 10,
   },
   hijriDay: {
     fontFamily: 'Lato_700Bold',

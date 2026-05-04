@@ -128,11 +128,11 @@ export default function SupportScreen() {
           <View style={[styles.msgBox, { backgroundColor: colors.bgSection, borderColor: colors.border }]}>
             <Star size={16} color={accent} fill="rgba(201,168,76,0.2)" />
             <Text style={[styles.msgText, { color: colors.textMuted }]}>
-              Les dons sont volontaires et consommables. Ils nous permettent de{' '}
+              Par votre générosité, nous continuons d'enrichir cette{' '}
               <Text style={{ color: colors.textSecondary, fontFamily: 'Lato_700Bold' }}>
-                créer du contenu de qualité
+                bibliothèque de sagesses
               </Text>
-              , d'inviter des récitateurs et d'enrichir la bibliothèque de sagesses.
+              {' '}et d'inviter des récitateurs de qualité.
             </Text>
           </View>
 

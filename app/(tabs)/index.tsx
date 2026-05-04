@@ -9,6 +9,7 @@ import {
   Dimensions,
   NativeSyntheticEvent,
   NativeScrollEvent,
+  Platform,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { ChevronLeft, ChevronRight, Target } from 'lucide-react-native';
@@ -20,6 +21,7 @@ import { PremiumPaywall } from '@/components/PremiumPaywall';
 import { IslamicCalendarWidget } from '@/components/IslamicCalendarWidget';
 import { TasbihCounter } from '@/components/TasbihCounter';
 import { DailyChallengeWidget } from '@/components/DailyChallengeWidget';
+import { AudioActivationBanner } from '@/components/AudioActivationBanner';
 import { useFavorites } from '@/hooks/useFavorites';
 import { usePremium, FREE_CARD_LIMIT } from '@/hooks/usePremium';
 import { useTheme } from '@/context/ThemeContext';
@@ -125,6 +127,8 @@ export default function HomeScreen() {
           currentIndex={activeIndex}
         />
 
+        <AudioActivationBanner />
+
         {/* Calendrier islamique */}
         <IslamicCalendarWidget />
 
@@ -217,7 +221,7 @@ export default function HomeScreen() {
           decelerationRate="fast"
           snapToInterval={SCREEN_WIDTH}
           snapToAlignment="start"
-          style={styles.flatList}
+          style={[styles.flatList, Platform.OS === 'web' && { flex: undefined, height: 340 }]}
           contentContainerStyle={styles.flatListContent}
           getItemLayout={(_, index) => ({
             length: SCREEN_WIDTH,
@@ -252,7 +256,7 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   root: { flex: 1 },
-  safeArea: { flex: 1 },
+  safeArea: { flex: 1, ...(Platform.OS === 'web' ? { overflowY: 'auto' as any } : {}) },
   header: {
     flexDirection: 'row',
     alignItems: 'center',

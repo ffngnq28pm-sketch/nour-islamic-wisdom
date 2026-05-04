@@ -177,5 +177,5 @@ export function useIslamicCalendar(): IslamicCalendarState {
     const period = getIslamicPeriod(hijri);
     const nextEvent = daysUntilNextEvent(hijri);
     return { hijri, lunarPhase, period, nextEvent };
-  }, []);
+  }, [new Date().toDateString()]);
 }

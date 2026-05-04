@@ -23,7 +23,7 @@ const FEATURES = [
   'Nouvelles cartes chaque semaine',
   'Fond d\'écran haute résolution',
   'Filtres par thème et source',
-  'Sans publicité',
+  'Parcours spirituels thématiques',
 ];
 
 export function PremiumModal({ visible, onClose, onUnlock }: Props) {

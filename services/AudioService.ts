@@ -1,20 +1,41 @@
 import { Audio } from 'expo-av';
 import { Platform } from 'react-native';
+import { AsyncStorage_like } from '@/context/storage';
 
-// Local ambient assets (bundled with the app — replace WAV placeholders with real recordings)
 const AMBIENT_SOURCES: Record<string, number | null> = {
-  rain: require('../assets/audio/rain.wav'),
-  wind: require('../assets/audio/wind.wav'),
-  mosque: require('../assets/audio/mosque.wav'),
-  silence: null,
+  rain:            require('../assets/audio/rain.wav'),
+  wind:            require('../assets/audio/wind.wav'),
+  mosque:          require('../assets/audio/mosque.wav'),
+  fatiha_ambiance: require('../assets/audio/fatiha_ambiance.wav'),
+  silence:         null,
 };
 
 export const AMBIENT_TRACKS = [
-  { id: 'rain',    label: 'Pluie douce',          emoji: '🌧️', premium: true },
-  { id: 'wind',    label: 'Vent dans les feuilles', emoji: '🍃', premium: true },
-  { id: 'mosque',  label: 'Mosquée lointaine',      emoji: '🕌', premium: true },
-  { id: 'silence', label: 'Silence sacré',           emoji: '🤍', premium: false },
+  { id: 'silence',         label: 'Silence sacré',      emoji: '🤍', premium: false },
+  { id: 'rain',            label: 'Pluie douce',         emoji: '🌧️', premium: true },
+  { id: 'wind',            label: 'Vent contemplatif',   emoji: '🍃', premium: true },
+  { id: 'mosque',          label: 'Mosquée lointaine',   emoji: '🕌', premium: true },
+  { id: 'fatiha_ambiance', label: 'Ambiance coranique',  emoji: '🌙', premium: true },
 ] as const;
+
+const WEB_UNLOCK_KEY = 'nour_web_audio_unlocked';
+const SILENCE_B64 = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA=';
+
+export function unlockWebAudioSync(silenceAssetUrl: string) {
+  if (Platform.OS !== 'web' || typeof document === 'undefined') return;
+  try {
+    const a = document.createElement('audio');
+    a.src = silenceAssetUrl || SILENCE_B64;
+    a.volume = 0.001;
+    a.play().catch(() => {});
+    AsyncStorage_like.set(WEB_UNLOCK_KEY, '1');
+  } catch {}
+}
+
+export function isWebAudioUnlocked(): boolean {
+  if (Platform.OS !== 'web') return true;
+  return AsyncStorage_like.get(WEB_UNLOCK_KEY) === '1';
+}
 
 export type AmbientId = (typeof AMBIENT_TRACKS)[number]['id'];
 
