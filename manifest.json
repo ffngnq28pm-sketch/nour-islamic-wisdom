@@ -1,0 +1,19 @@
+{
+  "name": "Nour — Sagesse Islamique",
+  "short_name": "Nour",
+  "description": "365 sagesses du Coran, des Hadiths et de la tradition islamique",
+  "start_url": "/nour-islamic-wisdom/",
+  "scope": "/nour-islamic-wisdom/",
+  "display": "standalone",
+  "background_color": "#050A1E",
+  "theme_color": "#C9A84C",
+  "orientation": "portrait",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "/nour-islamic-wisdom/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}
