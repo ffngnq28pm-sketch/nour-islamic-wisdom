@@ -29,7 +29,7 @@ const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const DEMO_DAY = 14;
 
 export default function RamadanScreen() {
-  const { isRamadan, day: realDay, total, iftarCountdown, iftarPassed } = useRamadan();
+  const { isRamadan, day: realDay, total, iftarCountdown, iftarPassed, daysUntilNextRamadan } = useRamadan();
   const { favoriteIds, toggleFavorite } = useFavorites();
   const { colors, theme } = useTheme();
 
@@ -88,24 +88,38 @@ export default function RamadanScreen() {
               </View>
             </View>
 
-            {/* Iftar countdown */}
+            {/* Iftar countdown / Next Ramadan */}
             <View style={styles.iftarBox}>
-              <View style={styles.iftarInner}>
-                <Clock size={14} color="#C9A84C" />
-                <Text style={styles.iftarLabel}>
-                  {iftarPassed ? 'Iftar — Bonne rupture du jeûne' : "Temps avant l'Iftar"}
-                </Text>
-              </View>
-              {!iftarPassed && (
-                <Text style={styles.iftarTimer}>{iftarCountdown}</Text>
-              )}
-              {iftarPassed && (
-                <Text style={styles.iftarDone}>مَعَ الشَّاكِرِينَ</Text>
-              )}
-              {!isRamadan && (
-                <Text style={styles.iftarNote}>
-                  (Mode aperçu — actif automatiquement en Ramadan)
-                </Text>
+              {isRamadan ? (
+                <>
+                  <View style={styles.iftarInner}>
+                    <Clock size={14} color="#C9A84C" />
+                    <Text style={styles.iftarLabel}>
+                      {iftarPassed ? 'Iftar — Bonne rupture du jeûne' : "Temps avant l'Iftar"}
+                    </Text>
+                  </View>
+                  {!iftarPassed && (
+                    <Text style={styles.iftarTimer}>{iftarCountdown}</Text>
+                  )}
+                  {iftarPassed && (
+                    <Text style={styles.iftarDone}>مَعَ الشَّاكِرِينَ</Text>
+                  )}
+                </>
+              ) : (
+                <>
+                  <View style={styles.iftarInner}>
+                    <Moon size={14} color="#C9A84C" fill="#C9A84C" />
+                    <Text style={styles.iftarLabel}>Prochain Ramadan</Text>
+                  </View>
+                  {daysUntilNextRamadan !== null ? (
+                    <Text style={styles.iftarTimer}>~{daysUntilNextRamadan} jours</Text>
+                  ) : (
+                    <Text style={styles.iftarTimer}>--</Text>
+                  )}
+                  <Text style={styles.iftarNote}>
+                    Dates exactes annoncées par les autorités religieuses
+                  </Text>
+                </>
               )}
             </View>
 

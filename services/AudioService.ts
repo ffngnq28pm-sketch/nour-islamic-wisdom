@@ -40,6 +40,7 @@ export function isWebAudioUnlocked(): boolean {
 export type AmbientId = (typeof AMBIENT_TRACKS)[number]['id'];
 
 let _ambientSound: Audio.Sound | null = null;
+let _webAmbientAudio: HTMLAudioElement | null = null;
 let _quranSound: Audio.Sound | null = null;
 let _audioConfigured = false;
 
@@ -127,10 +128,24 @@ export const AudioService = {
 
   // ── Ambient playback (local bundled files) ─────────────────────────────────
   async playAmbient(id: AmbientId, volume = 0.7) {
-    await ensureAudioConfigured();
     await this.stopAmbient();
     const source = AMBIENT_SOURCES[id];
-    if (!source) return; // silence mode
+    if (source === null || source === undefined) return; // silence mode
+
+    if (Platform.OS === 'web') {
+      if (typeof window === 'undefined') return;
+      const AudioCtor = (window as any).Audio;
+      if (!AudioCtor) return;
+      const url = typeof source === 'string' ? source : String(source);
+      const audio = new AudioCtor(url) as HTMLAudioElement;
+      audio.loop = true;
+      audio.volume = volume;
+      await audio.play();
+      _webAmbientAudio = audio;
+      return;
+    }
+
+    await ensureAudioConfigured();
     const { sound } = await Audio.Sound.createAsync(
       source as number,
       { isLooping: true, volume, shouldPlay: true }
@@ -139,6 +154,14 @@ export const AudioService = {
   },
 
   async stopAmbient() {
+    if (Platform.OS === 'web') {
+      if (_webAmbientAudio) {
+        _webAmbientAudio.pause();
+        _webAmbientAudio.src = '';
+        _webAmbientAudio = null;
+      }
+      return;
+    }
     if (_ambientSound) {
       await _ambientSound.stopAsync().catch(() => {});
       await _ambientSound.unloadAsync().catch(() => {});
@@ -147,10 +170,15 @@ export const AudioService = {
   },
 
   async setAmbientVolume(volume: number) {
+    if (Platform.OS === 'web') {
+      if (_webAmbientAudio) _webAmbientAudio.volume = volume;
+      return;
+    }
     if (_ambientSound) await _ambientSound.setVolumeAsync(volume).catch(() => {});
   },
 
   isAmbientPlaying(): boolean {
+    if (Platform.OS === 'web') return _webAmbientAudio !== null;
     return _ambientSound !== null;
   },
 };

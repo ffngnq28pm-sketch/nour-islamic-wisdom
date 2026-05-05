@@ -8,6 +8,7 @@ import {
   Vibration,
   Platform,
 } from 'react-native';
+import * as Haptics from 'expo-haptics';
 import { RotateCcw } from 'lucide-react-native';
 import { useTheme } from '@/context/ThemeContext';
 import { useTasbih } from '@/hooks/useTasbih';
@@ -72,7 +73,13 @@ export function TasbihCounter() {
             },
           ]}
           onPress={() => {
-            if (Platform.OS !== 'web') Vibration.vibrate(isMilestone ? [0, 30, 60, 30] : 20);
+            if (Platform.OS !== 'web') {
+              if (isMilestone) {
+                Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
+              } else {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(() => {});
+              }
+            }
             increment();
           }}
           activeOpacity={0.7}

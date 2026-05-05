@@ -46,12 +46,27 @@ function formatCountdown(ms: number): string {
   return [h, m, s].map((v) => String(v).padStart(2, '0')).join(':');
 }
 
+function getDaysUntilNextRamadan(now: Date): number | null {
+  const sorted = [...RAMADAN_DATES].sort(
+    (a, b) => new Date(a.start[0], a.start[1] - 1, a.start[2]).getTime() - new Date(b.start[0], b.start[1] - 1, b.start[2]).getTime()
+  );
+  for (const r of sorted) {
+    const start = new Date(r.start[0], r.start[1] - 1, r.start[2]);
+    if (start > now) {
+      const msUntil = start.getTime() - now.getTime();
+      return Math.ceil(msUntil / 86400000);
+    }
+  }
+  return null;
+}
+
 export interface RamadanState {
   isRamadan: boolean;
   day: number;
   total: number;
   iftarCountdown: string;
   iftarPassed: boolean;
+  daysUntilNextRamadan: number | null;
 }
 
 export function useRamadan(): RamadanState {
@@ -64,9 +79,10 @@ export function useRamadan(): RamadanState {
 
   const now = new Date();
   const info = getRamadanInfo(now);
+  const daysUntilNextRamadan = getDaysUntilNextRamadan(now);
 
   if (!info || !info.active) {
-    return { isRamadan: false, day: 0, total: 30, iftarCountdown: '--:--:--', iftarPassed: false };
+    return { isRamadan: false, day: 0, total: 30, iftarCountdown: '--:--:--', iftarPassed: false, daysUntilNextRamadan };
   }
 
   const iftar = getIftarTime();
@@ -79,5 +95,6 @@ export function useRamadan(): RamadanState {
     total: info.total,
     iftarCountdown: formatCountdown(msLeft),
     iftarPassed,
+    daysUntilNextRamadan: null,
   };
 }

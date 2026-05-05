@@ -9,10 +9,11 @@ import {
   TextInput,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { ArrowLeft, Search } from 'lucide-react-native';
+import { ArrowLeft, Search, BookOpen } from 'lucide-react-native';
 import { router } from 'expo-router';
 import { useTheme } from '@/context/ThemeContext';
 import { SURAHS } from '@/data/surahs';
+import { hasSurahText } from '@/data/surah_texts';
 
 export default function SurahsScreen() {
   const { colors } = useTheme();
@@ -94,23 +95,38 @@ export default function SurahsScreen() {
         keyExtractor={(s) => String(s.number)}
         contentContainerStyle={styles.list}
         showsVerticalScrollIndicator={false}
-        renderItem={({ item: s }) => (
-          <View style={[styles.surahRow, { backgroundColor: colors.bgCard, borderColor: colors.border }]}>
-            <View style={[styles.numBadge, { backgroundColor: 'rgba(201,168,76,0.12)', borderColor: 'rgba(201,168,76,0.3)' }]}>
-              <Text style={[styles.numText, { color: colors.textAccent }]}>{s.number}</Text>
-            </View>
-            <View style={styles.surahInfo}>
-              <View style={styles.surahNameRow}>
-                <Text style={[styles.surahFrench, { color: colors.textPrimary }]}>{s.french}</Text>
-                <Text style={[styles.surahArabic, { color: colors.textAccent }]}>{s.arabic}</Text>
+        renderItem={({ item: s }) => {
+          const hasText = hasSurahText(s.number);
+          return (
+            <TouchableOpacity
+              style={[styles.surahRow, { backgroundColor: colors.bgCard, borderColor: hasText ? 'rgba(201,168,76,0.35)' : colors.border }]}
+              onPress={() => router.push(`/surah-reader?number=${s.number}`)}
+              activeOpacity={0.8}
+            >
+              <View style={[styles.numBadge, { backgroundColor: 'rgba(201,168,76,0.12)', borderColor: 'rgba(201,168,76,0.3)' }]}>
+                <Text style={[styles.numText, { color: colors.textAccent }]}>{s.number}</Text>
               </View>
-              <Text style={[styles.surahMeta, { color: colors.textMuted }]}>
-                {s.transliteration} · {s.verses} versets · {s.revelation}
-              </Text>
-              <Text style={[styles.surahTheme, { color: colors.textSecondary }]}>{s.theme}</Text>
-            </View>
-          </View>
-        )}
+              <View style={styles.surahInfo}>
+                <View style={styles.surahNameRow}>
+                  <Text style={[styles.surahFrench, { color: colors.textPrimary }]}>{s.french}</Text>
+                  <Text style={[styles.surahArabic, { color: colors.textAccent }]}>{s.arabic}</Text>
+                </View>
+                <Text style={[styles.surahMeta, { color: colors.textMuted }]}>
+                  {s.transliteration} · {s.verses} versets · {s.revelation}
+                </Text>
+                <View style={styles.surahBottom}>
+                  <Text style={[styles.surahTheme, { color: colors.textSecondary }]}>{s.theme}</Text>
+                  {hasText && (
+                    <View style={styles.readBadge}>
+                      <BookOpen size={9} color="#C9A84C" />
+                      <Text style={styles.readBadgeText}>Lecture</Text>
+                    </View>
+                  )}
+                </View>
+              </View>
+            </TouchableOpacity>
+          );
+        }}
         ListEmptyComponent={
           <Text style={[styles.empty, { color: colors.textMuted }]}>Aucune sourate trouvée</Text>
         }
@@ -176,6 +192,17 @@ const styles = StyleSheet.create({
   surahFrench: { fontFamily: 'Lato_700Bold', fontSize: 15, flex: 1 },
   surahArabic: { fontFamily: 'Amiri_700Bold', fontSize: 20 },
   surahMeta: { fontFamily: 'Lato_400Regular', fontSize: 11, marginBottom: 2 },
+  surahBottom: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   surahTheme: { fontFamily: 'Lato_400Regular', fontSize: 11, fontStyle: 'italic' },
+  readBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 3,
+    backgroundColor: 'rgba(201,168,76,0.12)',
+    borderRadius: 8,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+  },
+  readBadgeText: { fontFamily: 'Lato_700Bold', fontSize: 9, color: '#C9A84C' },
   empty: { textAlign: 'center', fontFamily: 'Lato_400Regular', fontSize: 14, marginTop: 60 },
 });

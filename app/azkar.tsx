@@ -23,27 +23,32 @@ function DhikrCard({ dhikr, colors }: { dhikr: Dhikr; colors: any }) {
       onPress={() => setExpanded((e) => !e)}
       style={[styles.dhikrCard, { backgroundColor: colors.bgCard, borderColor: colors.border }]}
     >
-      <View style={styles.dhikrTop}>
-        <View style={styles.dhikrHeader}>
-          <View style={[styles.repBadge, { backgroundColor: 'rgba(201,168,76,0.15)' }]}>
-            <Text style={styles.repText}>×{dhikr.repetitions}</Text>
-          </View>
-          {expanded ? (
-            <ChevronUp size={16} color={colors.textMuted} />
-          ) : (
-            <ChevronDown size={16} color={colors.textMuted} />
-          )}
+      {/* Header row */}
+      <View style={styles.dhikrHeader}>
+        <View style={[styles.repBadge, { backgroundColor: 'rgba(201,168,76,0.15)' }]}>
+          <Text style={styles.repText}>×{dhikr.repetitions}</Text>
         </View>
-        <Text style={[styles.arabicText, { color: colors.textPrimary }]}>{dhikr.arabic}</Text>
+        {expanded ? (
+          <ChevronUp size={16} color={colors.textMuted} />
+        ) : (
+          <ChevronDown size={16} color={colors.textMuted} />
+        )}
       </View>
+
+      {/* Arabic — always visible */}
+      <Text style={[styles.arabicText, { color: colors.textPrimary }]}>{dhikr.arabic}</Text>
+
+      {/* French — always visible */}
+      <Text style={[styles.frenchText, { color: colors.textSecondary }]} numberOfLines={expanded ? undefined : 2}>
+        {dhikr.french}
+      </Text>
+
+      {/* Expanded: transliteration + source + virtue */}
       {expanded && (
         <View style={styles.dhikrExpanded}>
           <View style={[styles.divider, { backgroundColor: colors.border }]} />
           <Text style={[styles.translitText, { color: colors.textAccent }]}>
             {dhikr.transliteration}
-          </Text>
-          <Text style={[styles.frenchText, { color: colors.textSecondary }]}>
-            {dhikr.french}
           </Text>
           <View style={styles.dhikrMeta}>
             <Text style={[styles.sourceText, { color: colors.textMuted }]}>📖 {dhikr.source}</Text>

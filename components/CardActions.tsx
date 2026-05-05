@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Platform,
 } from 'react-native';
+import * as Haptics from 'expo-haptics';
 import { Heart, Share2, Image as ImageIcon } from 'lucide-react-native';
 import { WisdomCard } from '@/types';
 import { ShareCardModal } from './ShareCardModal';
@@ -27,7 +28,10 @@ export function CardActions({ card, isFavorite, onFavoriteToggle }: Props) {
         {/* Favorite */}
         <TouchableOpacity
           style={[styles.btn, isFavorite && styles.btnActive]}
-          onPress={onFavoriteToggle}
+          onPress={() => {
+            if (Platform.OS !== 'web') Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {});
+            onFavoriteToggle();
+          }}
           activeOpacity={0.75}
         >
           <Heart
